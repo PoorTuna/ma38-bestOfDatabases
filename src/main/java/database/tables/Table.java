@@ -1,6 +1,8 @@
 package database.tables;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Table {
 
@@ -21,4 +23,7 @@ public class Table {
 
     }
 
+    public Map<String, String> select(){
+        return null;
+    }
 }
