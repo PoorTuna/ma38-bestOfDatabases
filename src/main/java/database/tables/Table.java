@@ -2,7 +2,7 @@ package database.tables;
 
 import java.io.File;
 
-public class table {
+public class Table {
 
     private String path;
     private File dataFile;
