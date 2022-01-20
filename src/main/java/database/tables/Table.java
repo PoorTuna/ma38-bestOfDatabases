@@ -1,11 +1,13 @@
 package database.tables;
 
 import database.objects.BdbObj;
+import lombok.Data;
 
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+@Data
 public class Table extends TableUtil{
 
     private String path;
@@ -17,7 +19,7 @@ public class Table extends TableUtil{
     /**
      * This function gets an object to insert, validates the contents, adds it to the table data and updates the metadata.
      */
-    public <T extends BdbObj, pk> void insert(T obj, Field field){
+    public <T extends BdbObj> void insert(T obj){
 
     }
 
