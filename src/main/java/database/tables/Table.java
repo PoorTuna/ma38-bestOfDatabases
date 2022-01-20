@@ -33,6 +33,7 @@ public class Table {
 
     /**
      * This function takes a given primary key and returns the whole record if it finds it in the index file.
+     *
      * @return
      */
     public Map<String, String> select(String columnName) {
@@ -41,6 +42,7 @@ public class Table {
 
     /**
      * This function takes the files and combines it into a single map which contains the table data.
+     *
      * @return
      */
     public Map<String, String> selectAll() {
