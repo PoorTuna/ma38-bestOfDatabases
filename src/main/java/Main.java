@@ -13,7 +13,7 @@ public class Main {
         orenDB.createTable("xd", new Person("age", null, null, null, null));
         Table monkey  = orenDB.getTables().get("xd");
         for( int i = 0 ; i < 100 ; i++){
-            monkey.insert(new Person("man", i, "oren" + i, i, "Audi" + i));
+            monkey.insert(new Person("age", i, "oren" + i, i, "Audi" + i));
         }
     }
 }
