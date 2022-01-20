@@ -6,8 +6,14 @@ import java.lang.reflect.Field;
 import java.util.Locale;
 
 @Data
-public class OrenDBObj {
+public class OrenDBObj <T>{
     private String primaryKey;
+    private T primaryKeyValue;
+
+    public OrenDBObj(String primaryKey, T primaryKeyValue){
+        this.primaryKey = primaryKey;
+        this.primaryKeyValue = primaryKeyValue;
+    }
 
     /**
      * This function loops through the current object class and returns a description of its variables.

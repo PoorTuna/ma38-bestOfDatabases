@@ -21,7 +21,7 @@ public class Table <T extends OrenDBObj> extends TableUtil{
         this.name = name;
         this.path = path;
 
-        this.objModel = (T) new OrenDBObj();
+        this.objModel = (T) new OrenDBObj("", "");
         this.dataFile = new File(this.path + "\\data.db");
         this.indexFile = new File(this.path + "\\index.data");
         this.metaData = new File(this.path + "\\tb_metadata.data");
@@ -47,8 +47,8 @@ public class Table <T extends OrenDBObj> extends TableUtil{
     /**
      * This function gets an object to insert, validates the contents, adds it to the table data and updates the metadata.
      */
-    public void insert(T obj){
-
+    public void insert(T obj) throws IOException {
+        addIndex(this, obj);
     }
 
     /**

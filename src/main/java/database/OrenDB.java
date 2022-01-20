@@ -1,14 +1,14 @@
 package database;
 
 import database.tables.Table;
+import lombok.Data;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+@Data
 public class OrenDB {
     private String absPath;
     private File metadata;
