@@ -9,18 +9,11 @@ import java.util.Arrays;
 @Data
 public class BdbObj {
 
-    private String xd = "monkey";
-
-    public String getXd() {
-        return xd;
-    }
-
     /**
      * This function loops through the current object class and returns a description of its variables.
      *
      * @return temp : a described long string of the variables.
      */
-
     public String getVariables() {
         Class<?> c = this.getClass();
         StringBuilder temp = new StringBuilder();
@@ -34,13 +27,7 @@ public class BdbObj {
         }
         return temp.toString();
     }
-
-    public static void main(String[] args) {
-        BdbObj bdbObj = new BdbObj();
-        System.out.println(bdbObj.getVariables());
-
-    }
-
+    
 }
 
 

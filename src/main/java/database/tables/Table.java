@@ -9,9 +9,10 @@ import java.util.Map;
 public class Table extends TableUtil{
 
     private String path;
-    private File dataFile;
-    private File indexFile;
+    private File dataFile; //Todo : turn into a list
+    private File indexFile; //Todo : turn into a list
     private File metaData;
+    //Todo: add last file object that will monitor current state of data file?
 
     /**
      * This function gets an object to insert, validates the contents, adds it to the table data and updates the metadata.

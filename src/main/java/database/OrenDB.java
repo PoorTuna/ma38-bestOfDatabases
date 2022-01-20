@@ -5,13 +5,15 @@ import database.tables.Table;
 import java.io.File;
 import java.util.List;
 
-public class DB {
+public class OrenDB {
+    private String absPath;
     private File metadata;
     private List<Table> tables;
 
-    public DB(dbBuilder dbBuilder){
+    public OrenDB(dbBuilder dbBuilder){
         this.metadata = dbBuilder.metadata;
         this.tables = dbBuilder.tables;
+        this.absPath = dbBuilder.absPath;
     }
 
     public void updateTable(){
@@ -30,7 +32,11 @@ public class DB {
     public static class dbBuilder{
         public File metadata;
         public List<Table> tables;
+        public String absPath;
 
+        public dbBuilder(String absPath){
+            this.absPath = absPath;
+        }
         public dbBuilder addTable(Table table){
             this.tables.add(table);
             return this;
@@ -41,13 +47,18 @@ public class DB {
             return this;
         }
 
-        public DB build() {
-            DB database =  new DB(this);
-            validateDBObject(database);
+        public dbBuilder setAbsPath(String path){
+            this.absPath = path;
+            return this;
+        }
+
+        public OrenDB build() {
+            OrenDB database =  new OrenDB(this);
+            //validateDBObject(database);
             return database;
         }
 
-        private void validateDBObject(DB database) {
+        private void validateDBObject(OrenDB database) {
 
         }
 
