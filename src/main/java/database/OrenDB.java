@@ -53,9 +53,8 @@ public class OrenDB {
         }
 
         public OrenDB build() {
-            OrenDB database =  new OrenDB(this);
             //validateDBObject(database);
-            return database;
+            return new OrenDB(this);
         }
 
         private void validateDBObject(OrenDB database) {

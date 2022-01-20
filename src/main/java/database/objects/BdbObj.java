@@ -3,12 +3,16 @@ package database.objects;
 import lombok.Data;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.Locale;
 
 @Data
 public class BdbObj {
     private String primaryKey;
 
+    private String xd;
+    private Integer man;
+    private Date lmao;
     /**
      * This function loops through the current object class and returns a description of its variables.
      *
@@ -20,7 +24,11 @@ public class BdbObj {
 
         for (Field field : c.getDeclaredFields()) {
             try {
-                temp.append(field.getType()).append(":").append(field.getName()).append("=").append(field.get(this).toString()).append(",");
+                if (field.get(this) != null) {
+                    temp.append(field.getType()).append(":").append(field.getName()).append("=").append(field.get(this).toString()).append(",");
+                }else{
+                    temp.append(field.getType()).append(":").append(field.getName()).append("=").append("null").append(",");
+                }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -38,6 +46,11 @@ public class BdbObj {
         return false;
     }
 
+
+    public static void main(String[] args) {
+        BdbObj bdbObj = new BdbObj();
+        System.out.println(bdbObj.getVariables());
+    }
 }
 
 
