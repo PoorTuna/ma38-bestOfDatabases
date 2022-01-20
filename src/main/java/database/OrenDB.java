@@ -1,5 +1,6 @@
 package database;
 
+import database.objects.OrenDBObj;
 import database.tables.Table;
 import lombok.Data;
 
@@ -40,10 +41,10 @@ public class OrenDB extends OrenDBUtil{
     /**
      * This function creates a new table, adds it to the metadata, adds it to the table list.
      */
-    public void createTable(String name) throws IOException {
+    public <T extends OrenDBObj> void createTable(String name, T obj) throws IOException {
         File tempFolder = new File(this.absPath + "\\tables\\" + name);
         tempFolder.mkdir();
-        Table tempTable = new Table(name, this.absPath + "\\tables\\" + name);
+        Table tempTable = new Table(name, this.absPath + "\\tables\\" + name, obj);
         this.tables.put(tempTable.getName(), tempTable);
         //Todo : update the metadata file.
         this.metadataInsertTable(this, tempTable);

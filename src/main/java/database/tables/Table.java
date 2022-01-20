@@ -19,11 +19,11 @@ public class Table <T extends OrenDBObj> extends TableUtil{
     private File indexFile; //Todo : turn into a list
     private File metaData;
 
-    public Table(String name, String path) throws IOException {
+    public Table(String name, String path, T objModel) throws IOException {
         this.name = name;
         this.path = path;
 
-        this.objModel = (T) new OrenDBObj("", "");
+        this.objModel = objModel;
         this.dataFile = new File(this.path + "\\data.db");
         this.indexFile = new File(this.path + "\\index.data");
         this.metaData = new File(this.path + "\\tb_metadata.data");

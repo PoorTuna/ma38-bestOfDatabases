@@ -67,7 +67,7 @@ public class OrenDBObj<T> {
                 if (field.get(this) != null) {
                     temp.append(field.get(this).toString()).append(",");
                 } else {
-                    temp.append("Null").append(",");
+                    temp.append("null").append(",");
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
