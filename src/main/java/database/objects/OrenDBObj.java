@@ -22,8 +22,36 @@ public class OrenDBObj {
             try {
                 if (field.get(this) != null) {
                     temp.append(field.getType()).append(":").append(field.getName()).append("=").append(field.get(this).toString()).append(",");
-                }else{
+                } else {
                     temp.append(field.getType()).append(":").append(field.getName()).append("=").append("null").append(",");
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return temp.toString();
+    }
+
+    public String getVariablesNames() {
+        Class<?> c = this.getClass();
+        StringBuilder temp = new StringBuilder();
+
+        for (Field field : c.getDeclaredFields()) {
+            temp.append(field.getName()).append(",");
+        }
+        return temp.toString();
+    }
+
+    public String getVariablesValues() {
+        Class<?> c = this.getClass();
+        StringBuilder temp = new StringBuilder();
+
+        for (Field field : c.getDeclaredFields()) {
+            try {
+                if (field.get(this) != null) {
+                    temp.append(field.get(this).toString()).append(",");
+                } else {
+                    temp.append("Null").append(",");
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

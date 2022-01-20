@@ -8,23 +8,26 @@ import java.io.IOException;
 import java.util.Map;
 
 @Data
-public class Table extends TableUtil{
+public class Table <T extends OrenDBObj> extends TableUtil{
 
+    private T objModel;
     private String name;
     private String path;
     private File dataFile; //Todo : turn into a list
     private File indexFile; //Todo : turn into a list
     private File metaData;
 
-    public Table(String name, String path, File metaData) throws IOException {
+    public Table(String name, String path) throws IOException {
         this.name = name;
         this.path = path;
-        this.metaData = metaData;
 
+        this.objModel = (T) new OrenDBObj();
         this.dataFile = new File(this.path + "\\data.db");
         this.indexFile = new File(this.path + "\\index.data");
+        this.metaData = new File(this.path + "\\tb_metadata.data");
 
         this.createFiles();
+        this.createMetaDataFile(this);
 
     }
     private void createFiles() throws IOException {
@@ -33,12 +36,18 @@ public class Table extends TableUtil{
         this.metaData.createNewFile();
     }
 
+    public void removeFiles() throws IOException {
+        this.dataFile.delete();
+        this.indexFile.delete();
+        this.metaData.delete();
+    }
+
     //Todo: add last file object that will monitor current state of data file?
 
     /**
      * This function gets an object to insert, validates the contents, adds it to the table data and updates the metadata.
      */
-    public <T extends OrenDBObj> void insert(T obj){
+    public void insert(T obj){
 
     }
 

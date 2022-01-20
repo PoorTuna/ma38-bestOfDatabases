@@ -2,13 +2,21 @@ package database.tables;
 
 import database.objects.OrenDBObj;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class TableUtil {
 
     /**
      * This function creates a metadata file for the table
      */
-    protected void createMetaDataFile(){
+    protected void createMetaDataFile(Table tbl) throws IOException {
+        FileWriter fileWriter = new FileWriter(tbl.getMetaData());
+        fileWriter.write("colCount:" + tbl.getObjModel().getVariablesNames().split(",").length + "," +
+                "rowCount: 0" + System.lineSeparator());
+        fileWriter.write(tbl.getObjModel().getVariablesNames() + System.lineSeparator());
 
+        fileWriter.close();
     }
 
     /**

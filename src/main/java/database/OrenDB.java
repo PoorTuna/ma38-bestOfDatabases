@@ -5,12 +5,14 @@ import database.tables.Table;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrenDB {
     private String absPath;
     private File metadata;
-    private List<Table> tables;
+    private Map<String, Table> tables;
 
     public OrenDB(dbBuilder dbBuilder) throws IOException {
         this.metadata = dbBuilder.metadata;
@@ -18,7 +20,9 @@ public class OrenDB {
         this.absPath = dbBuilder.absPath;
 
         if(this.tables == null){
-            this.tables = new ArrayList<>();
+            this.tables = new HashMap<>(){{
+
+            }};
         }
         if(this.metadata == null){
             this.metadata = new File(this.absPath + "\\db_metadata.data");
@@ -36,32 +40,37 @@ public class OrenDB {
      * This function creates a new table, adds it to the metadata, adds it to the table list.
      */
     public void createTable(String name) throws IOException {
-        File tempFile = new File(this.absPath + "\\tables\\" + name);
-        tempFile.mkdir();
-        Table tempTable = new Table(name, this.absPath + "\\tables\\" + name, new File(this.absPath + "\\tables\\" + name + "\\tb_metadata.data"));
-        this.tables.add(tempTable);
+        File tempFolder = new File(this.absPath + "\\tables\\" + name);
+        tempFolder.mkdir();
+        Table tempTable = new Table(name, this.absPath + "\\tables\\" + name);
+        this.tables.put(tempTable.getName(), tempTable);
         //Todo : update the metadata file.
     }
 
-    public void updateTable(){
+    public String removeTable(String name) throws IOException {
+        if (tables.containsKey(name)){
+            this.tables.get(name).removeFiles();
+            this.tables.remove(name);
 
-    }
+            File tempFolder = new File(this.absPath + "\\tables\\" + name);
+            tempFolder.delete();
 
-    public void removeTable(){
-
+            return "Table : " + name + " removed successfully";
+        }
+        return "Invalid table!";
     }
 
 
     public static class dbBuilder{
         public File metadata;
-        public List<Table> tables;
+        public Map<String, Table> tables;
         public String absPath;
 
         public dbBuilder(String absPath){
             this.absPath = absPath;
         }
         public dbBuilder addTable(Table table){
-            this.tables.add(table);
+            this.tables.put(table.getName(), table);
             return this;
         }
 
