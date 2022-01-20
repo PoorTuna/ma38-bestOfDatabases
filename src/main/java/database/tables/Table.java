@@ -1,6 +1,9 @@
 package database.tables;
 
+import database.objects.BdbObj;
+
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.Map;
 
 public class Table {
@@ -13,7 +16,7 @@ public class Table {
     /**
      * This function gets an object to insert, validates the contents, adds it to the table data and updates the metadata.
      */
-    public <T> void insert(T obj) {
+    public <T extends BdbObj, pk> void insert(T obj, Field field){
 
     }
 
