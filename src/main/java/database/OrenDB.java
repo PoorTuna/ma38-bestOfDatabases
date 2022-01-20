@@ -16,12 +16,14 @@ public class OrenDB {
         this.metadata = dbBuilder.metadata;
         this.tables = dbBuilder.tables;
         this.absPath = dbBuilder.absPath;
+
         if(this.tables == null){
             this.tables = new ArrayList<>();
         }
         if(this.metadata == null){
             this.metadata = new File(this.absPath + "\\db_metadata.data");
         }
+
         this.createFiles();
     }
 
