@@ -36,6 +36,7 @@ public class OrenDB extends OrenDBUtil{
         temp.mkdir();
         this.metadata.createNewFile();
     }
+
     /**
      * This function creates a new table, adds it to the metadata, adds it to the table list.
      */

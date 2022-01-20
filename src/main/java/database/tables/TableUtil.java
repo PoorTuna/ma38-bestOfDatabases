@@ -2,8 +2,7 @@ package database.tables;
 
 import database.objects.OrenDBObj;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 @SuppressWarnings("ALL")
 public class TableUtil {
@@ -31,9 +30,17 @@ public class TableUtil {
      * This function creates a formatted index file.
      */
     protected <T extends OrenDBObj> void addIndex(Table tbl, T obj) throws IOException {
-        FileWriter fileWriter = new FileWriter(tbl.getIndexFile(), true);
-        fileWriter.write(0 + ":" + obj.getPrimaryKeyValue() +  System.lineSeparator());
-        fileWriter.close();
+        // if already exists throw an exception
+        //String
+        if (this.validatePrimaryKey(this.loadFile(tbl.getIndexFile()), obj)) {
+            FileWriter fileWriter = new FileWriter(tbl.getIndexFile(), true);
+            fileWriter.write(0 + ":" + obj.getPrimaryKeyValue() + System.lineSeparator());
+            fileWriter.close();
+        }
+        else{
+            throw new IOException();
+        }
+
     }
 
     /**
@@ -45,6 +52,20 @@ public class TableUtil {
 
     protected <T extends OrenDBObj> boolean validateRecord(T obj, Table table) {
         return obj.getVariables().equals(table.getDataFile());
+    }
+
+    protected BufferedReader loadFile(File file) throws IOException {
+        return new BufferedReader(new FileReader(file));
+    }
+
+    protected <T extends OrenDBObj> boolean validatePrimaryKey(BufferedReader indexFile, T obj) throws IOException {
+        String line;
+        while ((line = indexFile.readLine()) != null) {
+            if (line.split(":")[1].equals(obj.getPrimaryKeyValue())){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

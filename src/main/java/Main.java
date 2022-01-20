@@ -9,6 +9,6 @@ public class Main {
 
         OrenDB orenDB = new OrenDB.dbBuilder("src\\dbs\\OrenDB").build();
         orenDB.createTable("xd");
-        orenDB.getTables().get("xd").insert(new OrenDBObj("xd", "xdLol"));
+        orenDB.getTables().get("xd").insert(new OrenDBObj("man", "man"));
     }
 }
