@@ -1,9 +1,6 @@
 package database.tables;
 
-import database.objects.BdbObj;
-
-import java.lang.reflect.Field;
-import java.util.Locale;
+import database.objects.OrenDBObj;
 
 public class TableUtil {
 
@@ -36,7 +33,7 @@ public class TableUtil {
 
     }
 
-    protected  <T extends BdbObj> boolean validateRecord(T obj, Table table){
+    protected <T extends OrenDBObj> boolean validateRecord(T obj, Table table){
         return obj.getVariables().equals(table.getDataFile());
     }
 

@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.Locale;
 
 @Data
-public class BdbObj {
+public class OrenDBObj {
     private String primaryKey;
 
     /**

@@ -1,25 +1,44 @@
 package database.tables;
 
-import database.objects.BdbObj;
+import database.objects.OrenDBObj;
 import lombok.Data;
 
 import java.io.File;
-import java.lang.reflect.Field;
+import java.io.IOException;
 import java.util.Map;
 
 @Data
 public class Table extends TableUtil{
 
+    private String name;
     private String path;
     private File dataFile; //Todo : turn into a list
     private File indexFile; //Todo : turn into a list
     private File metaData;
+
+    public Table(String name, String path, File metaData) throws IOException {
+        this.name = name;
+        this.path = path;
+        this.metaData = metaData;
+
+        this.dataFile = new File(this.path + "\\data.db");
+        this.indexFile = new File(this.path + "\\index.data");
+
+        this.createFiles();
+
+    }
+    private void createFiles() throws IOException {
+        this.dataFile.createNewFile();
+        this.indexFile.createNewFile();
+        this.metaData.createNewFile();
+    }
+
     //Todo: add last file object that will monitor current state of data file?
 
     /**
      * This function gets an object to insert, validates the contents, adds it to the table data and updates the metadata.
      */
-    public <T extends BdbObj> void insert(T obj){
+    public <T extends OrenDBObj> void insert(T obj){
 
     }
 

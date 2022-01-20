@@ -3,6 +3,8 @@ package database;
 import database.tables.Table;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrenDB {
@@ -10,10 +12,33 @@ public class OrenDB {
     private File metadata;
     private List<Table> tables;
 
-    public OrenDB(dbBuilder dbBuilder){
+    public OrenDB(dbBuilder dbBuilder) throws IOException {
         this.metadata = dbBuilder.metadata;
         this.tables = dbBuilder.tables;
         this.absPath = dbBuilder.absPath;
+        if(this.tables == null){
+            this.tables = new ArrayList<>();
+        }
+        if(this.metadata == null){
+            this.metadata = new File(this.absPath + "\\db_metadata.data");
+        }
+        this.createFiles();
+    }
+
+    public void createFiles() throws IOException {
+        File temp = new File(absPath + "\\tables");
+        temp.mkdir();
+        this.metadata.createNewFile();
+    }
+    /**
+     * This function creates a new table, adds it to the metadata, adds it to the table list.
+     */
+    public void createTable(String name) throws IOException {
+        File tempFile = new File(this.absPath + "\\tables\\" + name);
+        tempFile.mkdir();
+        Table tempTable = new Table(name, this.absPath + "\\tables\\" + name, new File(this.absPath + "\\tables\\" + name + "\\tb_metadata.data"));
+        this.tables.add(tempTable);
+        //Todo : update the metadata file.
     }
 
     public void updateTable(){
@@ -21,10 +46,6 @@ public class OrenDB {
     }
 
     public void removeTable(){
-
-    }
-
-    public void createTable(){
 
     }
 
@@ -52,7 +73,7 @@ public class OrenDB {
             return this;
         }
 
-        public OrenDB build() {
+        public OrenDB build() throws IOException {
             //validateDBObject(database);
             return new OrenDB(this);
         }
