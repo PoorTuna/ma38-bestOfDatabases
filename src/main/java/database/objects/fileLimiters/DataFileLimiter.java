@@ -1,4 +1,9 @@
 package database.objects.fileLimiters;
 
-public class DataFileLimiter {
+import database.objects.FileLimiter;
+
+public class DataFileLimiter extends FileLimiter {
+    public DataFileLimiter(int recordLimit) {
+        super(recordLimit);
+    }
 }

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
-public class OrenDB {
+public class OrenDB extends OrenDBUtil{
     private String absPath;
     private File metadata;
     private Map<String, Table> tables;
@@ -45,6 +45,7 @@ public class OrenDB {
         Table tempTable = new Table(name, this.absPath + "\\tables\\" + name);
         this.tables.put(tempTable.getName(), tempTable);
         //Todo : update the metadata file.
+        this.metadataInsertTable(this, tempTable);
     }
 
     public String removeTable(String name) throws IOException {
