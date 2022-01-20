@@ -23,8 +23,6 @@ public class OrenDBUtil {
 
     }
 
-
-
     // size of directory in bytes
     public static long getDirectorySize(String path) {
 

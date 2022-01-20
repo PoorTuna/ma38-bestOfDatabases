@@ -1,12 +1,13 @@
 package database.tables;
 
+import database.objects.FileLimiter;
 import database.objects.OrenDBObj;
 
 import java.io.*;
 
 @SuppressWarnings("ALL")
 public class TableUtil {
-
+    FileLimiter limiter = new FileLimiter(100);
     /**
      * This function creates a metadata file for the table
      */
@@ -34,7 +35,8 @@ public class TableUtil {
         //String
         if (this.validatePrimaryKey(this.loadFile(tbl.getIndexFile()), obj)) {
             FileWriter fileWriter = new FileWriter(tbl.getIndexFile(), true);
-            fileWriter.write(0 + ":" + obj.getPrimaryKeyValue() + System.lineSeparator());
+            fileWriter.write(limiter.getRecordCount() + ":" + obj.getPrimaryKeyValue() + System.lineSeparator());
+            limiter.increment();
             fileWriter.close();
         }
         else{

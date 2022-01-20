@@ -4,6 +4,7 @@ import database.objects.OrenDBObj;
 import lombok.Data;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
@@ -49,6 +50,9 @@ public class Table <T extends OrenDBObj> extends TableUtil{
      * This function gets an object to insert, validates the contents, adds it to the table data and updates the metadata.
      */
     public void insert(T obj) throws IOException {
+        FileWriter fileWriter = new FileWriter(this.getDataFile(), true);
+        fileWriter.write(obj.getVariablesValues() + System.lineSeparator());
+        fileWriter.close();
         addIndex(this, obj);
     }
 

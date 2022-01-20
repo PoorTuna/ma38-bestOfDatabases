@@ -1,5 +1,6 @@
 import database.OrenDB;
 import database.objects.OrenDBObj;
+import database.tables.Table;
 
 import java.io.IOException;
 
@@ -9,6 +10,9 @@ public class Main {
 
         OrenDB orenDB = new OrenDB.dbBuilder("src\\dbs\\OrenDB").build();
         orenDB.createTable("xd");
-        orenDB.getTables().get("xd").insert(new OrenDBObj("man", "man"));
+        Table monkey  = orenDB.getTables().get("xd");
+        for( int i = 0 ; i < 100 ; i++){
+            monkey.insert(new OrenDBObj<>("man", i));
+        }
     }
 }
