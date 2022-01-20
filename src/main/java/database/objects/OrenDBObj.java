@@ -6,11 +6,11 @@ import java.lang.reflect.Field;
 import java.util.Locale;
 
 @Data
-public class OrenDBObj <T>{
+public class OrenDBObj<T> {
     private String primaryKey;
     private T primaryKeyValue;
 
-    public OrenDBObj(String primaryKey, T primaryKeyValue){
+    public OrenDBObj(String primaryKey, T primaryKeyValue) {
         this.primaryKey = primaryKey;
         this.primaryKeyValue = primaryKeyValue;
     }
@@ -38,6 +38,11 @@ public class OrenDBObj <T>{
         return temp.toString();
     }
 
+    /**
+     * This function loops through the current object class and returns the variables names.
+     *
+     * @return temp : a string of the variables.
+     */
     public String getVariablesNames() {
         Class<?> c = this.getClass();
         StringBuilder temp = new StringBuilder();
@@ -48,6 +53,11 @@ public class OrenDBObj <T>{
         return temp.toString();
     }
 
+    /**
+     * This function loops through the current object class and returns the variables values.
+     *
+     * @return temp : a string of the variables values.
+     */
     public String getVariablesValues() {
         Class<?> c = this.getClass();
         StringBuilder temp = new StringBuilder();

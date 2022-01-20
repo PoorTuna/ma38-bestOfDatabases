@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Data
 public class Table <T extends OrenDBObj> extends TableUtil{
 

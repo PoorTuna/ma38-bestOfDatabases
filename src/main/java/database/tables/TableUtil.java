@@ -2,10 +2,10 @@ package database.tables;
 
 import database.objects.OrenDBObj;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+@SuppressWarnings("ALL")
 public class TableUtil {
 
     /**
