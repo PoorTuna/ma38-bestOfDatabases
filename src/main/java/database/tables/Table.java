@@ -6,6 +6,8 @@ import lombok.Data;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 
 @SuppressWarnings("ALL")
@@ -66,7 +68,14 @@ public class Table <T extends OrenDBObj> extends TableUtil{
     /**
      * This function takes a record primary key and checks if it exists in the index files. if it does it removes it from the records, metadata and index.
      */
-    public void remove(String primaryKey) {
+    public void remove(T obj) throws IOException {
+        String lineNumber = removeIndex(this, obj);
+        if (!lineNumber.equals("null")){
+            Files.lines(this.getDataFile().toPath()).skip(Integer.parseInt(lineNumber) + 1).findFirst().get();
+        }
+        else{
+            throw new IOException();
+        }
 
     }
 

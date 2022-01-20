@@ -45,6 +45,19 @@ public class TableUtil {
 
     }
 
+    protected <T extends OrenDBObj> String removeIndex(Table tbl, T obj) throws IOException {
+
+        String line;
+        while ((line = loadFile(tbl.getIndexFile()).readLine()) != null) {
+            if (line.split(":")[1].equals(obj.getPrimaryKeyValue())){
+                line.trim();
+                return line.split(":")[0];
+            }
+        }
+        return "null";
+
+    }
+
     /**
      * This function updates the table's index file.
      */

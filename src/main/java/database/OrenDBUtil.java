@@ -14,7 +14,7 @@ public class OrenDBUtil {
      * This function adds the table to the db metadata file.
      */
     public void metadataInsertTable(OrenDB orenDB, Table tbl) throws IOException {
-        FileWriter fileWriter = new FileWriter(orenDB.getMetadata(), true);
+        FileWriter fileWriter = new FileWriter(orenDB.getMetadata());
         fileWriter.write(tbl.getName() + ":" + getDirectorySize(tbl.getPath()) + System.lineSeparator());
 
         fileWriter.close();
