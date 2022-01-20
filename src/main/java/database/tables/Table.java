@@ -6,7 +6,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-public class Table {
+public class Table extends TableUtil{
 
     private String path;
     private File dataFile;
